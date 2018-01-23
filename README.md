@@ -11,6 +11,7 @@ This is a custom WHMCS module built for our resellers to enable remote Domain Re
 4. Choose to pay via credit card. You must have one on file. This will ensure domains are registered/renewed when your WHMCS requests. If you do not want to use a credit card, you must have a credit balance on your account with RAD WEB HOSTING.
 5. Add the following code to /includes/additionaldomainfields.php if using WHMCS v6 or add to /resources/domains/additionalfields.php if using WHMCS v7:
 ```
+/********************************************* RadWebHosting Domain Additional Fields ********************************************/
 if(!defined('DS'))
     define('DS',DIRECTORY_SEPARATOR);
 $filename = ROOTDIR.DS.'modules'.DS.'registrars'.DS.'RadWebHosting'.DS.'RadWebHosting.php';
@@ -20,6 +21,7 @@ if(file_exists($filename)){
     if(is_array($fields))
         $additionaldomainfields = $fields;     
 }
+/********************************************* End RadWebHosting Domain Additional Fields *****************************************/
 ```
 
 ## Help
