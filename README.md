@@ -17,7 +17,7 @@ if(!defined('DS'))
 $filename = ROOTDIR.DS.'modules'.DS.'registrars'.DS.'RadWebHosting'.DS.'RadWebHosting.php';
 if(file_exists($filename)){
     require_once ($filename);
-    $fields = radwebhosting_GetDomainFields();
+    $fields = RadWebHosting_GetDomainFields();
     if(is_array($fields))
         $additionaldomainfields = $fields;     
 }
