@@ -25,7 +25,7 @@ if(file_exists($filename)){
 ```
 
 ## Help
-If you have any questions or problems please submit a [Domain Support Ticket](https://radwebhosting.com/client_area/client_area/submitticket.php?step=2&deptid=10).
+If you have any questions or problems please submit a [Domain Support Ticket](https://radwebhosting.com/client_area/submitticket.php?step=2&deptid=10).
 
 ## Bugs
 If you discover any bugs or issues with this module, please notify our staff via the [24/7 Helpdesk](https://radwebhosting.com/client_area/submitticket.php).
