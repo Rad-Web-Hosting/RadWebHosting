@@ -16,23 +16,23 @@ function RadWebHosting_getConfigArray() {
 	$configarray = array(
 		"FriendlyName" => array(
 			"Type"          => "System",
-			"Value"         => "RadWebHosting"
+			"Value"         => "RAD WEB HOSTING"
 		),
 		"Description" => array(
 			"Type"          => "System",
-			"Value"         => "This registrar allows you to offer a wide variety of TLD straight from your provider system."
+			"Value"         => "Offer a wide variety of TLD from your remote WHMCS."
 		),
 		"api_email" => array(
 			"FriendlyName"  => "User Email",
 			"Type"          => "text",
 			"Size"          => "40",
-			"Description"   => "Enter your email ID of Rad Web Hosting account"
+			"Description"   => "Enter your email at RAD WEB HOSTING"
 		),
 		"api_key" => array(
 			"FriendlyName"  => "API Key",
 			"Type"          => "text",
 			"Size"          => "40",
-			"Description"   => "Enter your API key recived from Rad Web Hosting"
+			"Description"   => "Enter your RAD WEB HOSTING Domains API key"
 		),
 	);
 	return $configarray;
@@ -44,7 +44,8 @@ function RadWebHosting_getConfigArray() {
 * @param array $params
 * @return array $return
 */
-function RadWebHosting_RegisterDomain($params) {
+function RadWebHosting_RegisterDomain($params)
+{
 	$API = new RadWebHosting_API($params['api_email'], $params['api_key']);
         $requeststring = array(
 		'action'		=> 'RegisterDomain',
@@ -86,6 +87,27 @@ function RadWebHosting_RegisterDomain($params) {
                 'domainfields'          => base64_encode(serialize($params["additionalfields"]))
 	);
         
+        if(isset($params['phonenumberformatted']))
+        {
+            $requeststring['phonenumberformatted'] = $params['phonenumberformatted'];
+        }
+        if(isset($params['statecode']))
+        {
+            $requeststring['statecode'] = $params['statecode'];
+        }        
+        if(isset($params['adminfullstate']))
+        {
+            $requeststring['adminfullstate'] = $params['adminfullstate'];
+        }
+        if(isset($params['countrycode']))
+        {
+            $requeststring['countrycode'] = $params['countrycode'];
+        }        
+        if(isset($params['fullstate']))
+        {
+            $requeststring['fullstate'] = $params['fullstate'];
+        }
+        
 	$result = $API->simpleCall('POST', $requeststring);
 
 	return $API->getError() ? array( 'error' => $API->getError() ) : 'success';
@@ -97,9 +119,10 @@ function RadWebHosting_RegisterDomain($params) {
 * @param array $params
 * @return array $return
 */
-function RadWebHosting_TransferDomain($params) {
+function RadWebHosting_TransferDomain($params)
+{
 	$API = new RadWebHosting_API($params['api_email'], $params['api_key']);
-	$API->simpleCall('POST', array(
+        $requeststring = array(
                 'action'		=> 'TransferDomain',
 		'transfersecret'        => $params['transfersecret'],
 		'sld'			=> $params["sld"],
@@ -138,7 +161,30 @@ function RadWebHosting_TransferDomain($params) {
                 'adminfullphonenumber'  => $params["adminfullphonenumber"],
 		'adminemail'		=> $params["adminemail"],
                 'domainfields'          => base64_encode(serialize($params["additionalfields"]))
-	));
+	);
+        
+        if(isset($params['phonenumberformatted']))
+        {
+            $requeststring['phonenumberformatted'] = $params['phonenumberformatted'];
+        }
+        if(isset($params['statecode']))
+        {
+            $requeststring['statecode'] = $params['statecode'];
+        }        
+        if(isset($params['adminfullstate']))
+        {
+            $requeststring['adminfullstate'] = $params['adminfullstate'];
+        }
+        if(isset($params['countrycode']))
+        {
+            $requeststring['countrycode'] = $params['countrycode'];
+        }          
+        if(isset($params['fullstate']))
+        {
+            $requeststring['fullstate'] = $params['fullstate'];
+        }        
+        
+        $API->simpleCall('POST', $requeststring);
 	
 	return $API->getError() ? array( 'error' => $API->getError() ) : 'success';
 }
@@ -247,12 +293,15 @@ function RadWebHosting_GetEPPCode($params){
             'tld'		=> $params["tld"],
     ));
 
-
-    if($data['result']=='success'){
+    if($data['result']=='success') {
+        if(is_array($data['eppcode']))
+        {
+            $data['eppcode'] = reset($data['eppcode']);
+        }
         return array('eppcode'=>$data['eppcode']);
-    }    
-    else
-        return array('error'=>$API->getError());
+    }
+    
+    return array('error'=>$API->getError());
 }
 
 /**
