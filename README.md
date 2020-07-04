@@ -6,28 +6,50 @@ After account creation, users gain access to the Domain API by siging up for a D
 <p align="center"><a href="https://radwebhosting.com" target="_blank"><img width="350" src="https://avatars0.githubusercontent.com/u/16030710?s=460&v=4" alt="RAD WEB HOSTING"></a></p>
 
 ## About
-This is a custom WHMCS module built for our resellers to enable remote Domain Registration and management of RAD WEB HOSTING domains.
+* This is a Domain Registrar module for WHMCS to integrate API functionality for Domains resellers, allowing them to remotely manage Rad Web Hosting domain names in remote WHMCS installation. This module also installs Client Area domain management functions for use by end-clients.
+* Simplifies the automation of registering, transferring, and renewing domain names, and provides for complete remote control of all domain functions. 
+
+## Prerequisites
+Please read the following system requirements for WHMCS Domain Reseller module:
+* Working WHMCS installation (v5.3+)
+* RAD WEB HOSTING API key
+
+Users can gain access to API key by signing up for a Domain Reseller account
 
 ## Installation
-1. Download the module via the following [link](https://github.com/Rad-Web-Hosting/RadWebHosting/releases/latest)
-1. Copy the `RadWebHosting` directory into the respective WHMCS directory in your WHMCS setup: `/whmcs/modules/registrars/`
-2. In WHMCS Admin area, navigate to Setup -> Products/Services -> Domain Registrars and activate the `RadWebHosting` registrar
-3. Enter your API username and API secret. These can be obtained via your [Hosting Dashboard](https://radwebhosting.com/client_area/clientarea.php).
-4. Choose to pay via credit card. You must have one on file. This will ensure domains are registered/renewed when your WHMCS requests. If you do not want to use a credit card, you must have a credit balance on your account with RAD WEB HOSTING.
-5. Add the following code to /includes/additionaldomainfields.php if using WHMCS v6 or add to /resources/domains/additionalfields.php if using WHMCS v7:
-```
-/********************************************* RadWebHosting Domain Additional Fields ********************************************/
-if(!defined('DS'))
-    define('DS',DIRECTORY_SEPARATOR);
-$filename = ROOTDIR.DS.'modules'.DS.'registrars'.DS.'RadWebHosting'.DS.'RadWebHosting.php';
-if(file_exists($filename)){
-    require_once ($filename);
-    $fields = RadWebHosting_GetDomainFields();
-    if(is_array($fields))
-        $additionaldomainfields = $fields;     
-}
-/********************************************* End RadWebHosting Domain Additional Fields *****************************************/
-```
+1. Download the module
+2. Upload  to the WHMCS root directory (i.e. /home/user/whmcs ) and extract the files
+3. In WHMCS Admin area, navigate to Setup -> Products/Services -> Domain Registrars and activate the `radwebhosting` registrar
+4. Enter your API username and API secret. These can be obtained via your Hosting Dashboard.
+5. Add funds to your account. API domain registrations/transfers/renewals are paid using your existing account balance. PayPal, Credit Cards, and over 40 cryptocurrencies can be used for funding. $20 is the minimum funds allowed per transaction.
+
+## API Features
+* DNS Modifications
+* Email Forwarding
+* Private Registrations 
+* Modify Contacts
+* Modify Registrar Lock/Unlock
+* Get Domain Auth Code
+* Domain/URL Forwarding
+* DNS Management (A, AAAA, CNAME, MX, TXT)
+* Domain suggestion, domain delete
+
+* Register/Transfer/Renew Domain
+* Release/Delete Domain
+* Get/Modify Contact Details
+* Get EPP Code
+* Get/Modify Registrar Lock Status
+* Get/Save DNS Records
+* Get/Register/Modify/Delete Nameservers
+* Get/Save Email Forwarding
+* Modify ID Protection
+* Check Domain And Transfer Synchronization
+* Check Domain Availability
+* Get Available TLDs
+* Get Available Credits
+* Get Version
+
+For full documentation, please visit the Rad Web Hosting Domain API documentation on the website.
 
 ## Help
 If you have any questions or problems please submit a [Domain Support Ticket](https://radwebhosting.com/client_area/submitticket.php?step=2&deptid=10).
